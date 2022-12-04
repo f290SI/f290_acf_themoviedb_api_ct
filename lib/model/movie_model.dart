@@ -4,26 +4,25 @@ part 'movie_model.g.dart';
 
 @JsonSerializable()
 class MovieModel {
-  int? id;
-  bool? adult;
+  bool? adult = false;
+  int? id = 0;
   @JsonKey(name: 'backdrop_path')
-  String? backdropPath;
+  String? backdropPath = '';
   @JsonKey(name: 'original_language')
-  String? originalLanguage;
+  String? originalLanguage = '';
   @JsonKey(name: 'original_title')
-  String? originalTitle;
-  String? overview;
-  String? popularity;
+  String? originalTitle = '';
+  String? overview = '';
+  double? popularity = 0.0;
   @JsonKey(name: 'poster_path')
-  String? posterPath;
+  String? posterPath = '';
   @JsonKey(name: 'release_date')
-  String? releaseDate;
-  String? title;
-  bool? video;
+  String? releaseDate = '';
+  String? title = '';
   @JsonKey(name: 'vote_average')
-  double? voteAverage;
+  double? voteAverage = 0.0;
   @JsonKey(name: 'vote_count')
-  int? voteCount;
+  int? voteCount = 0;
 
   MovieModel(
       {this.id,
