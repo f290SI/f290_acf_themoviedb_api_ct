@@ -5,6 +5,7 @@ import 'package:f290_acf_themoviedb_api_ct/pages/detail/detail_page.dart';
 import 'package:f290_acf_themoviedb_api_ct/repository/movie_repository.dart';
 import 'package:f290_acf_themoviedb_api_ct/service/movie_service.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -74,6 +75,10 @@ class _HomePageState extends State<HomePage> {
         initialData: movies,
         future: service.getMovies(title),
         builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              snapshot.connectionState == ConnectionState.none) {
+            return loadingSpinner();
+          }
           movies = snapshot.data as List<MovieModel>;
           return Padding(
             padding: const EdgeInsets.all(4.0),
@@ -114,6 +119,25 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }),
+      ),
+    );
+  }
+
+  Widget loadingSpinner() {
+    return const Center(
+      child: SizedBox(
+        width: 150,
+        height: 150,
+        child: LoadingIndicator(
+          indicatorType: Indicator.ballRotateChase,
+          colors: [
+            Colors.blue,
+            Colors.green,
+            Colors.yellow,
+            Colors.orange,
+            Colors.red
+          ],
+        ),
       ),
     );
   }
